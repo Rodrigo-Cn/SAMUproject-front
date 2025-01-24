@@ -1,5 +1,5 @@
 <template>
-    <div  class="bg-theme bg-theme">
+    <div id="login"  class="bg-theme bg-theme9">
         <div id="wrapper">
             <div class="card card-authentication1 mx-auto my-5">
                 <div class="card-body">
@@ -33,3 +33,11 @@ export default {
   },
 };
 </script>
+<style>
+    #login{
+        padding-top: 5%;
+    }
+    #wrapper{
+        padding-bottom: 5%;
+    }
+</style>
