@@ -1,6 +1,6 @@
 <template>
 
-    <div class="bg-theme bg-theme9">
+    <div :class="['bg-theme', themeStore.theme]">
 
         <div id="wrapper">
 
@@ -60,7 +60,7 @@
                                             Visitor</li>
                                     </ul>
                                     <div class="chart-container-1">
-                                        <canvas id="chart1"></canvas>
+                                        Gráfico 1
                                     </div>
                                 </div>
 
@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="chart-container-2">
-                                        <canvas id="chart2"></canvas>
+                                        gráfico2
                                     </div>
                                 </div>
                                 <div class="table-responsive">
@@ -142,7 +142,10 @@
 
 </template>
 <script setup>
+import { useThemeStore } from '~/stores/themeStore';
 import { useHead } from 'nuxt/app';
+
+const themeStore = useThemeStore();
 
 useHead({
     title: 'Saúde Integrada',

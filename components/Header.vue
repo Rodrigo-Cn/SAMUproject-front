@@ -14,8 +14,9 @@
 
             <ul class="navbar-nav align-items-center right-nav-link">
                 <li class="nav-item dropdown-lg">
-                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown">
-                        <i class="fa fa-envelope-open-o"></i></a>
+                    <a @click="changeTheme" class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown">
+                        <i :class="['fa', mode]"></i>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
@@ -47,6 +48,30 @@
         </nav>
     </header>
 </template>
+<script>
+    import { useThemeStore } from '~/stores/themeStore';
+
+    export default {
+    data() {
+        return {
+            themeStore: useThemeStore(),
+        };
+    },
+    computed: {
+        mode() {
+            return this.themeStore.mode;
+        },
+        theme() {
+            return this.themeStore.theme; 
+        },
+    },
+    methods: {
+        changeTheme() {
+            this.themeStore.toggleTheme();
+        },
+    },
+    };
+</script>
 <style scoped>
 .dropdown-item{
     cursor: pointer;

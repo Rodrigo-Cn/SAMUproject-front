@@ -32,7 +32,7 @@
 </script>
 <style scoped>
     #about{
-        color: rgb(190, 190, 190);
+        color: rgb(255, 255, 255);
     }
     .my-icon{
         color: white;
