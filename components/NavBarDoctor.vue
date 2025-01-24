@@ -71,3 +71,8 @@
         </div>
     </div>
 </template>
+<style scoped>
+    .sidebar-menu li span{
+        color: white;
+    }
+</style>

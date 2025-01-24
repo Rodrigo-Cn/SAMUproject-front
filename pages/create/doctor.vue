@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-theme bg-theme9">
+    <div :class="['bg-theme', this.themeStore.theme]">
         <div id="wrapper">
             <NavBarAdministrator />
             <Header />
@@ -10,13 +10,12 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="card-title custom-title">Realizar Atendimento</div>
-                                <hr>
+                                <hr />
                                 <form>
                                     <div class="form-group">
                                         <label for="nome-paciente">Nome do Paciente</label>
                                         <select class="form-control form-control-rounded" id="nome-paciente">
                                             <option value="">Selecione o paciente</option>
-                                            <!-- Exemplo de opções que virão do banco de dados -->
                                             <option value="1">Paciente 1</option>
                                             <option value="2">Paciente 2</option>
                                         </select>
@@ -24,7 +23,7 @@
                                     <div class="form-group">
                                         <label for="idade">Idade</label>
                                         <input type="number" class="form-control form-control-rounded" id="idade"
-                                            placeholder="Digite a idade">
+                                            placeholder="Digite a idade" />
                                     </div>
                                     <div class="form-group">
                                         <label for="endereco">Endereço</label>
@@ -38,7 +37,6 @@
                                         <label for="medico">Médico</label>
                                         <select class="form-control form-control-rounded" id="medico">
                                             <option value="">Selecione o médico</option>
-                                            <!-- Exemplo de opções que virão do banco de dados -->
                                             <option value="1">Dr. João</option>
                                             <option value="2">Dra. Maria</option>
                                         </select>
@@ -47,7 +45,6 @@
                                         <label for="medicamento">Medicamento</label>
                                         <select class="form-control form-control-rounded" id="medicamento">
                                             <option value="">Selecione o medicamento</option>
-                                            <!-- Exemplo de opções que virão do banco de dados -->
                                             <option value="1">Medicamento A</option>
                                             <option value="2">Medicamento B</option>
                                         </select>
@@ -55,45 +52,55 @@
                                     <div class="form-group">
                                         <label for="data-atendimento">Data do Atendimento</label>
                                         <input type="date" class="form-control form-control-rounded"
-                                            id="data-atendimento">
+                                            id="data-atendimento" />
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-light btn-round px-5 button-register"><i
-                                                class="icon-lock"></i> Adicionar</button>
-                                            <button type="submit" class="btn btn-light btn-round px-5">
-                                            <i class="icon-lock"></i> Voltar</button>
+                                        <button type="submit" class="btn btn-light btn-round px-5 button-register">
+                                            <i class="icon-lock"></i> Adicionar
+                                        </button>
+                                        <button type="submit" class="btn btn-light btn-round px-5">
+                                            <i class="icon-lock"></i> Voltar
+                                        </button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
 
         <Footer />
     </div>
 </template>
-<script setup>
-import { useHead } from 'nuxt/app';
+<script>
+import { useThemeStore } from "~/stores/themeStore";
+import { title } from "/composables/title";
 
-useHead({
-    title: 'Registrar Médico',
-});
+export default {
+    mounted() {
+        title("Saúde Integrada");
+    },
+    data() {
+        return {
+            themeStore: useThemeStore(),
+        };
+    },
+};
 </script>
 <style scoped>
-    .container-fluid{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
-    .custom-title{
-        font-size: 130%;
-    }
-    .button-register{
-        margin-right: 2%;
-    }
+.container-fluid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.custom-title {
+    font-size: 130%;
+}
+
+.button-register {
+    margin-right: 2%;
+}
 </style>

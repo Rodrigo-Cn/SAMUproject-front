@@ -1,6 +1,6 @@
 <template>
 
-    <div :class="['bg-theme', themeStore.theme]">
+    <div :class="['bg-theme', this.themeStore.theme]">
 
         <div id="wrapper">
 
@@ -141,13 +141,18 @@
     </div>
 
 </template>
-<script setup>
+<script>
 import { useThemeStore } from '~/stores/themeStore';
-import { useHead } from 'nuxt/app';
+import { title } from '/composables/title';
 
-const themeStore = useThemeStore();
-
-useHead({
-    title: 'Saúde Integrada',
-});
+export default {
+  mounted() {
+    title('Saúde Integrada');
+  },
+  data(){
+    return  {
+        themeStore : useThemeStore(),
+    }
+  }
+};
 </script>

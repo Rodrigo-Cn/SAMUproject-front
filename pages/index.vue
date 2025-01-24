@@ -24,10 +24,12 @@
     </div>
     
 </template>
-<script setup>
-import { useHead } from 'nuxt/app';
+<script>
+import { title } from '/composables/title';
 
-useHead({
-  title: 'Login',
-});
+export default {
+  mounted() {
+    title('Login');
+  },
+};
 </script>
