@@ -1,5 +1,5 @@
 <template>
-    <div :class="['bg-theme', this.themeStore.theme]">
+    <div :class="['bg-theme', themeStore.theme]">
         <div id="wrapper">
             <NavBarAdministrator />
             <Header />
@@ -74,18 +74,15 @@
     </div>
 </template>
 <script>
-import { useThemeStore } from "~/stores/themeStore";
-import { title } from "/composables/title";
+import { useThemeStore } from '~/stores/themeStore';
+import { title } from '/composables/title';
 
 export default {
-    mounted() {
-        title("Saúde Integrada");
-    },
-    data() {
-        return {
-            themeStore: useThemeStore(),
-        };
-    },
+  setup() {
+    const themeStore = useThemeStore();
+    title('Saúde Integrada');
+    return { themeStore };
+  },
 };
 </script>
 <style scoped>
