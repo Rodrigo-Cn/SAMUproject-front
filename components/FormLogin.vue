@@ -27,6 +27,7 @@
 <script>
 import { showSuccessNotification, showErrorNotification } from "~/utils/notifications";
 import { useAuthStore } from "~/stores/authtoken";
+
 export default {
   data() {
     return {
@@ -60,10 +61,9 @@ export default {
         const authStore = useAuthStore();
         authStore.setToken(response.token);
         showSuccessNotification("Login realizado com sucesso!");
-
         navigateTo("/home");
+
       } catch (error) {
-        console.error("Erro:", error);
         showErrorNotification("Usuário ou senha incorretos.");
       }
     }

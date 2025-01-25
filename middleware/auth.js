@@ -1,4 +1,5 @@
 import { useAuthStore } from '~/stores/authtoken';
+import { useRouter } from 'vue-router';
 
 export default defineNuxtRouteMiddleware(() => {
     if (process.server) {
@@ -9,6 +10,7 @@ export default defineNuxtRouteMiddleware(() => {
     authStore.loadToken();
 
     if (!authStore.isAuthenticated) {
-        return navigateTo('/login', { replace: true });
+        const router = useRouter();
+        router.push('/login'); 
     }
 });

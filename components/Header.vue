@@ -14,7 +14,8 @@
 
             <ul class="navbar-nav align-items-center right-nav-link">
                 <li class="nav-item dropdown-lg">
-                    <a @click="changeTheme" class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown">
+                    <a @click="changeTheme" class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect"
+                        data-toggle="dropdown">
                         <i :class="['fa', mode]"></i>
                     </a>
                 </li>
@@ -39,19 +40,20 @@
                             <i class="icon-settings mr-2"></i>Editar Conta
                         </li>
                         <li class="dropdown-divider"></li>
-                        <li class="dropdown-item">
+                        <li class="dropdown-item"  data-toggle="modal" data-target="#exampleModal">
                             <i class="icon-power mr-2"></i>Sair
                         </li>
                     </ul>
                 </li>
             </ul>
         </nav>
+        <Logout/>
     </header>
 </template>
 <script>
-    import { useThemeStore } from '~/stores/themeStore';
+import { useThemeStore } from '~/stores/themeStore';
 
-    export default {
+export default {
     data() {
         return {
             themeStore: useThemeStore(),
@@ -62,7 +64,7 @@
             return this.themeStore.mode;
         },
         theme() {
-            return this.themeStore.theme; 
+            return this.themeStore.theme;
         },
     },
     methods: {
@@ -70,10 +72,10 @@
             this.themeStore.toggleTheme();
         },
     },
-    };
+};
 </script>
 <style scoped>
-.dropdown-item{
+.dropdown-item {
     cursor: pointer;
 }
 </style>
