@@ -6,6 +6,10 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
   ],
   app: {
+    pageTransition:{
+      name: "page",
+      mode: "out-in"
+    },
     head: {
       script: [
         { src: '/assets/js/jquery.min.js', type: 'text/javascript' },

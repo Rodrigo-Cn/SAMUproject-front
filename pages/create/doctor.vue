@@ -3,7 +3,6 @@
         <div id="wrapper">
             <NavBarAdministrator />
             <Header />
-
             <div class="content-wrapper">
                 <div class="container-fluid">
                     <div class="col-lg-10">

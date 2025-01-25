@@ -21,8 +21,7 @@
             </div>
         </div>
         <Footer/>
-    </div>
-    
+    </div>  
 </template>
 <script>
 import { title } from '/composables/title';
