@@ -21,46 +21,45 @@
             </div>
         </div>
         <button type="submit" class="btn btn-light btn-block">Entrar</button>
-        <div class="text-center mt-3">Seja bem-vindo! {{ token }}</div>
+        <div class="text-center mt-3">Seja bem-vindo!</div>
     </form>
 </template>
-
 <script>
-import axios from "axios";
+import { useAuthStore } from "~/stores/authtoken";
 
 export default {
-    data() {
-        return {
-            username: "",
-            password: "",
-            token: "",
-        };
-    },
-    methods: {
-        async login(event) {
-            event.preventDefault();
-            const data = {
-                username: this.username,
-                password: this.password,
-            };
+  data() {
+    return {
+      username: "",
+      password: "",
+    };
+  },
+  methods: {
+    async login(event) {
+      event.preventDefault();
 
-            try {
-                const response = await axios.post(
-                    "http://127.0.0.1:8000/api/v1/authentication/login/",
-                    data,
-                    {
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                    }
-                );
-                console.log(response.data);
-                this.token = response.data.token;
-                this.$router.push('/home');
-            } catch (error) {
-                console.error(error);
-            }
-        },
+      const data = {
+        username: this.username,
+        password: this.password,
+      };
+
+      try {
+        const response = await $fetch("http://127.0.0.1:8000/api/v1/authentication/login/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: data,
+        });
+        const authStore = useAuthStore();
+        authStore.setToken(response.token);
+        navigateTo("/home");
+
+      } catch (error) {
+        console.error(error);
+        alert("Falha no login. Verifique suas credenciais.");
+      }
     },
+  },
 };
 </script>

@@ -32,6 +32,7 @@ export default {
     title('Login');
   },
 };
+
 </script>
 <style>
     #login{

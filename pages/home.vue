@@ -140,6 +140,10 @@
 import { useThemeStore } from "~/stores/themeStore";
 import { title } from "/composables/title";
 
+definePageMeta({
+    middleware: ['auth']
+})
+
 export default {
     setup() {
         const themeStore = useThemeStore();
