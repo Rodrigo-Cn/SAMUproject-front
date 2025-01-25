@@ -87,6 +87,9 @@ declare global {
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
   const showError: typeof import('../../node_modules/nuxt/dist/app/composables/error')['showError']
+  const showErrorNotification: typeof import('../../utils/notifications')['showErrorNotification']
+  const showInfoNotification: typeof import('../../utils/notifications')['showInfoNotification']
+  const showSuccessNotification: typeof import('../../utils/notifications')['showSuccessNotification']
   const storeToRefs: typeof import('../../node_modules/@pinia/nuxt/dist/runtime/composables')['storeToRefs']
   const title: typeof import('../../composables/title')['title']
   const toRaw: typeof import('vue')['toRaw']
@@ -271,6 +274,9 @@ declare module 'vue' {
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
     readonly showError: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/error')['showError']>
+    readonly showErrorNotification: UnwrapRef<typeof import('../../utils/notifications')['showErrorNotification']>
+    readonly showInfoNotification: UnwrapRef<typeof import('../../utils/notifications')['showInfoNotification']>
+    readonly showSuccessNotification: UnwrapRef<typeof import('../../utils/notifications')['showSuccessNotification']>
     readonly storeToRefs: UnwrapRef<typeof import('../../node_modules/@pinia/nuxt/dist/runtime/composables')['storeToRefs']>
     readonly title: UnwrapRef<typeof import('../../composables/title')['title']>
     readonly toRaw: UnwrapRef<typeof import('vue')['toRaw']>

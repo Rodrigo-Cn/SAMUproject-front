@@ -1,32 +1,32 @@
 <template>
-    <form @submit="login($event)">
-        <div class="form-group">
-            <label for="exampleInputEmailId" class="sr-only">Email ID</label>
-            <div class="position-relative has-icon-right">
-                <input v-model="username" type="text" id="exampleInputEmailId" class="form-control input-shadow"
-                    placeholder="Usuário" />
-                <div class="form-control-position">
-                    <i class="icon-user"></i>
-                </div>
-            </div>
+  <form @submit="login($event)">
+    <div class="form-group">
+      <label for="exampleInputEmailId" class="sr-only">Email ID</label>
+      <div class="position-relative has-icon-right">
+        <input v-model="username" type="text" id="exampleInputEmailId" class="form-control input-shadow"
+          placeholder="Usuário" />
+        <div class="form-control-position">
+          <i class="icon-user"></i>
         </div>
-        <div class="form-group">
-            <label for="exampleInputPassword" class="sr-only">Password</label>
-            <div class="position-relative has-icon-right">
-                <input v-model="password" type="password" id="exampleInputPassword" class="form-control input-shadow"
-                    placeholder="Senha" />
-                <div class="form-control-position">
-                    <i class="icon-lock"></i>
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword" class="sr-only">Password</label>
+      <div class="position-relative has-icon-right">
+        <input v-model="password" type="password" id="exampleInputPassword" class="form-control input-shadow"
+          placeholder="Senha" />
+        <div class="form-control-position">
+          <i class="icon-lock"></i>
         </div>
-        <button type="submit" class="btn btn-light btn-block">Entrar</button>
-        <div class="text-center mt-3">Seja bem-vindo!</div>
-    </form>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-light btn-block">Entrar</button>
+    <div class="text-center mt-3">Seja bem-vindo!</div>
+  </form>
 </template>
 <script>
+import { showSuccessNotification, showErrorNotification } from "~/utils/notifications";
 import { useAuthStore } from "~/stores/authtoken";
-
 export default {
   data() {
     return {
@@ -37,6 +37,11 @@ export default {
   methods: {
     async login(event) {
       event.preventDefault();
+
+      if(this.username == "" || this.password == "" ){
+        showErrorNotification("Algum campo está vazio.");
+        return
+      }
 
       const data = {
         username: this.username,
@@ -49,17 +54,20 @@ export default {
           headers: {
             "Content-Type": "application/json",
           },
-          body: data,
+          body: JSON.stringify(data),
         });
+
         const authStore = useAuthStore();
         authStore.setToken(response.token);
-        navigateTo("/home");
+        showSuccessNotification("Login realizado com sucesso!");
 
+        navigateTo("/home");
       } catch (error) {
-        console.error(error);
-        alert("Falha no login. Verifique suas credenciais.");
+        console.error("Erro:", error);
+        showErrorNotification("Usuário ou senha incorretos.");
       }
-    },
+    }
+    ,
   },
 };
 </script>
