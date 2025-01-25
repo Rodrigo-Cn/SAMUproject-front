@@ -27,6 +27,10 @@
 <script>
 import { title } from '/composables/title';
 
+definePageMeta({
+    middleware: ['authenticated']
+})
+
 export default {
   mounted() {
     title('Login');

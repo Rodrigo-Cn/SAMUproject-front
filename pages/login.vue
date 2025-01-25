@@ -28,6 +28,10 @@
 import { title } from '/composables/title';
 import { showInfoNotification } from "~/utils/notifications";
 
+definePageMeta({
+    middleware: ['authenticated']
+})
+
 export default {
   mounted() {
     showInfoNotification("Faça o login em sua conta.")
