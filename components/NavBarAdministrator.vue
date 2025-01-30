@@ -40,8 +40,8 @@
                 </li>
 
                 <li class="sidebar-header">Cadastro</li>
-                <li>
-                    <a href="s"><i class="fas fa-user-plus text-danger"></i>
+                <li data-toggle="modal" data-target="#createDoctorModal">
+                    <a ><i class="fas fa-user-plus text-danger"></i>
                         <span>Cadastrar Médico</span></a>
                 </li>
                 <li>
@@ -50,10 +50,14 @@
                 </li>
             </ul>
         </div>
+        <CreateDoctor/>
     </div>
 </template>
 <style scoped>
     .sidebar-menu li span{
         color: white;
+    }
+    li{
+        cursor: pointer;
     }
 </style>
