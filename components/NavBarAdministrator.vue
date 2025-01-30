@@ -10,61 +10,42 @@
             <ul class="sidebar-menu do-nicescrol">
                 <li class="sidebar-header">Página de Navegação</li>
                 <li>
-                    <a href="">
-                        <i class="zmdi zmdi-home"></i> <span>Página Inicial</span>
+                    <a href="/home/">
+                        <i class="fas fa-home"></i> <span>Página Inicial</span>
                     </a>
                 </li>
                 <li>
-                    <a href="tables.html">
-                        <i class="zmdi zmdi-grid"></i> <span>Pacientes</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="tables.html">
-                        <i class="zmdi zmdi-grid"></i> <span>Médicos</span>
+                    <a href="/patients/">
+                        <i class="fas fa-procedures"></i> <span>Pacientes</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="formsAtendimento.html">
-                        <i class="zmdi zmdi-format-list-bulleted"></i>
-                        <span>Registrar Atendimento</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="formsPaciente.html">
-                        <i class="zmdi zmdi-face"></i> <span>Cadastrar Paciente</span>
+                    <a href="/doctors/">
+                        <i class="fas fa-user-md"></i> <span>Médicos</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="register.html" target="_blank">
-                        <i class="zmdi zmdi-account-circle"></i>
-                        <span>Registar Médico</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="calendar.html">
-                        <i class="zmdi zmdi-calendar-check"></i> <span>Mapa</span>
+                    <a href="/medicines/">
+                        <i class="fas fa-capsules"></i> <span>Medicamentos</span>
                         <small class="badge float-right badge-light"></small>
                     </a>
                 </li>
 
                 <li>
-                    <a href="login.html" target="_blank">
-                        <i class="zmdi zmdi-lock"></i> <span>Login</span>
+                    <a href="/cares/">
+                        <i class="zmdi zmdi-hospital"></i> <span>Atendimentos</span>
                     </a>
                 </li>
 
                 <li class="sidebar-header">Cadastro</li>
                 <li>
-                    <a href="s"><i class="zmdi zmdi-plus-circle text-danger"></i>
+                    <a href="s"><i class="fas fa-user-plus text-danger"></i>
                         <span>Cadastrar Médico</span></a>
                 </li>
                 <li>
-                    <a href="s"><i class="zmdi zmdi-hospital-alt text-danger"></i>
+                    <a href="s"><i class="fas fa-pills text-danger"></i>
                         <span>Cadastrar Medicamento</span></a>
                 </li>
             </ul>
