@@ -44,13 +44,14 @@
                     <a ><i class="fas fa-user-plus text-danger"></i>
                         <span>Cadastrar Médico</span></a>
                 </li>
-                <li>
-                    <a href="s"><i class="fas fa-pills text-danger"></i>
+                <li data-toggle="modal" data-target="#createMedicineModal">
+                    <a><i class="fas fa-pills text-danger"></i>
                         <span>Cadastrar Medicamento</span></a>
                 </li>
             </ul>
         </div>
         <CreateDoctor/>
+        <CreateMedicine/>
     </div>
 </template>
 <style scoped>

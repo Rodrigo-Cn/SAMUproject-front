@@ -7,36 +7,48 @@
                 <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span> </button> </div>
                 <div class="modal-body p-0 row" :class="['bg-theme', themeStore.theme]">
-                    <div class="col-12 col-lg-5 ad p-0"> <img src="public/assets/images/doccreate.gif" width="100%"
+                    <div class="col-12 col-lg-5 ad p-0"> <img src="public/assets/images/medicine.gif" width="100%"
                             height="100%" /> </div>
                     <div class="details col-12 col-lg-7">
-                        <h4><i class="fas fa-user-plus"></i> Cadastrar Medicamento</h4>
+                        <h4><i class="fas fas fa-pills"></i> Cadastrar Medicamento</h4>
                         <form class="form-group mt-3 pt-3 mb-4">
+                            <!-- Nome do Medicamento -->
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                <input type="text" class="form-control" placeholder="Usuário" required>
+                                <span class="input-group-text"><i class="fas fa-capsules"></i></span>
+                                <input type="text" class="form-control custom-input" placeholder="Nome" name="name"
+                                    required>
+                            </div>
+
+                            <!-- Dosagem -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="fas fa-pills"></i></span>
+                                <input type="text" class="form-control custom-input" placeholder="Dosagem" name="dosage"
+                                    required>
+                            </div>
+
+                            <!-- Fabricante -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="fas fa-industry"></i></span>
+                                <input type="text" class="form-control custom-input" placeholder="Fabricante"
+                                    name="manufacturer" required>
+                            </div>
+
+                            <!-- Composição -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="fas fa-flask"></i></span>
+                                <input type="text" class="form-control custom-input" placeholder="Composição"
+                                    name="composition" required>
                             </div>
 
                             <div class="input-group mb-3">
-                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                                <input type="password" class="form-control" placeholder="Senha" required>
+                                <div class="file-upload-container">
+                                    <input type="file" class="file-input" name="medicine_image" id="medicine_image"
+                                        required>
+                                    <label for="medicine_image" class="file-label">
+                                        <i class="fas fa-upload"></i> Escolher Imagem
+                                    </label>
+                                </div>
                             </div>
-
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                <input type="email" class="form-control" placeholder="Email" required>
-                            </div>
-
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                <input type="text" class="form-control" placeholder="Nome" required>
-                            </div>
-
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><i class="fas fa-user-md"></i></span>
-                                <input type="text" class="form-control" placeholder="CRM" required>
-                            </div>
-
                             <div class="">
                                 <button type="submit" class="btn btn-light">
                                     <i class="fa fa-plus"></i> Cadastrar
@@ -62,6 +74,14 @@ export default {
 
 </script>
 <style scoped>
+.file-input{
+    cursor: pointer;
+}
+
+.file-label{
+    cursor: pointer;
+}
+
 .form-group {
     display: flex;
     flex-direction: column;
@@ -78,16 +98,16 @@ body {
     background-color: #eee;
 }
 
-.modal-body{
+.modal-body {
     border-radius: 8% 2% 2% 8%;
 }
 
-img{
+img {
     border-radius: 8%;
 }
 
 .input-group-text i {
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .container {
