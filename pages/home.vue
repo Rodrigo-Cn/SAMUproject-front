@@ -135,19 +135,14 @@
         <Footer />
     </div>
 </template>
-<script>
+<script setup>
 import { useThemeStore } from "~/stores/themeStore";
 import { title } from "/composables/title";
 
 definePageMeta({
     middleware: ['auth']
-})
+});
 
-export default {
-    setup() {
-        const themeStore = useThemeStore();
-        title("Saúde Integrada");
-        return { themeStore };
-    },
-};
+const themeStore = useThemeStore();
+title("Saúde Integrada");
 </script>

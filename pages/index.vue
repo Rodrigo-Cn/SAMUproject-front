@@ -23,19 +23,14 @@
         <Footer/>
     </div>  
 </template>
-<script>
-import { title } from '/composables/title';
+<script setup>
+import { title } from "/composables/title";
 
 definePageMeta({
-    middleware: ['authenticated']
-})
+  middleware: ["authenticated"],
+});
 
-export default {
-  mounted() {
-    title('Login');
-  },
-};
-
+title("Login");
 </script>
 <style>
     #login{

@@ -24,20 +24,19 @@
     </div>
     
 </template>
-<script>
-import { title } from '/composables/title';
+<script setup>
+import { title } from "/composables/title";
 import { showInfoNotification } from "~/utils/notifications";
+import { onMounted } from "vue";
 
 definePageMeta({
-    middleware: ['authenticated']
-})
+  middleware: ["authenticated"],
+});
 
-export default {
-  mounted() {
-    showInfoNotification("Faça o login em sua conta.")
-    title('Login');
-  },
-};
+onMounted(() => {
+  showInfoNotification("Faça o login em sua conta.");
+  title("Login");
+});
 </script>
 <style>
     #login{

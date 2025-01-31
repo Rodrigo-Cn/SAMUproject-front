@@ -1,75 +1,89 @@
-# Nuxt Minimal Starter
+# Front-end do Projeto **Saúde Integrada do SAMU**
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+O **Saúde Integrada do SAMU** é um sistema inovador desenvolvido para facilitar a integração e otimização dos processos do SAMU, com foco em melhorar o atendimento de saúde emergencial. Este repositório contém o **front-end** da aplicação, desenvolvido utilizando **Nuxt 3** e **Vue 3**.
 
-## Setup
+---
 
-Make sure to install dependencies:
+## 🚀 Como Executar
 
+### **Windows**
+
+Certifique-se de ter o Docker instalado e as dependências necessárias configuradas. Siga os passos abaixo:
+
+1. Construa a imagem do Docker:
 ```bash
-# npm
-npm install
+   docker-compose build
 
-# pnpm
-pnpm install
+    Suba o container:
 
-# yarn
-yarn install
-
-# bun
-bun install
+    docker-compose up
 ```
 
-## Development Server
+Linux
 
-Start the development server on `http://localhost:3000`:
+Os mesmos passos podem ser seguidos no Linux. Caso utilize alguma ferramenta de container como Docker, basta seguir os comandos acima para executar o projeto.
+🌍 Servidor de Desenvolvimento
 
-```bash
-# npm
-npm run dev
+Para rodar o servidor de desenvolvimento, basta executar um dos seguintes comandos de acordo com o seu gerenciador de pacotes preferido. O servidor estará disponível em `http://localhost:3000\`.
+Usando npm:
 
-# pnpm
-pnpm dev
+```bash npm run dev ```
+Usando pnpm:
 
-# yarn
-yarn dev
+```bash pnpm dev ```
+Usando yarn:
 
-# bun
-bun run dev
-```
+```bash yarn dev ```
+Usando bun:
 
-## Production
+```bash bun run dev ```
+📦 Produção
+Construir a aplicação para produção
 
-Build the application for production:
+Para criar uma versão otimizada para produção, use um dos seguintes comandos:
+Usando npm:
 
-```bash
-# npm
-npm run build
+```bash npm run build ```
+Usando pnpm:
 
-# pnpm
-pnpm build
+```bash pnpm build ```
+Usando yarn:
 
-# yarn
-yarn build
+```bash yarn build ```
+Usando bun:
 
-# bun
-bun run build
-```
+```bash bun run build ```
+Visualizar o build de produção localmente
 
-Locally preview production build:
+Após gerar o build de produção, você pode fazer uma prévia localmente utilizando os seguintes comandos:
+Usando npm:
 
-```bash
-# npm
-npm run preview
+```bash npm run preview ```
+Usando pnpm:
 
-# pnpm
-pnpm preview
+```bash pnpm preview ```
+Usando yarn:
 
-# yarn
-yarn preview
+```bash yarn preview ```
+Usando bun:
 
-# bun
-bun run preview
-```
+```bash bun run preview ```
+🛠 Ferramentas Utilizadas
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Este projeto faz uso das seguintes tecnologias e ferramentas:
+
+    HTML e CSS para a estrutura e estilo da interface.
+    SCSS e SASS para o pré-processamento de estilos.
+    Bootstrap para a construção de uma interface responsiva e moderna.
+    JavaScript e TypeScript para desenvolvimento dinâmico e tipado.
+    Vue 3 para a criação da interface de usuário reativa.
+    Pinia para gerenciamento de estado global.
+    Nuxt 3 como framework para renderização do lado do servidor e otimização de desempenho.
+    Vue3-toastify para mostrar notificações de forma simples e intuitiva.
+    Axios para fazer chamadas HTTP de maneira eficiente.
+
+📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
+
+Este README foi desenvolvido para fornecer todas as informações necessárias para executar, desenvolver e contribuir com o projeto Saúde Integrada do SAMU. Caso tenha dúvidas ou precise de mais informações, fique à vontade para abrir uma issue ou enviar um pull request.' > README.md
