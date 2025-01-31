@@ -27,53 +27,95 @@ Linux
 
 Os mesmos passos podem ser seguidos no Linux. Caso utilize alguma ferramenta de container como Docker, basta seguir os comandos acima para executar o projeto.
 
-###🌍 Servidor de Desenvolvimento
+### 🚀 Servidor de Desenvolvimento
 
-Para rodar o servidor de desenvolvimento, basta executar um dos seguintes comandos de acordo com o seu gerenciador de pacotes preferido. O servidor estará disponível em `http://localhost:3000\`.
-Usando npm:
+Para rodar o servidor de desenvolvimento, basta executar um dos seguintes comandos de acordo com o seu gerenciador de pacotes preferido. O servidor estará disponível em \`http://localhost:3000\`.
 
-```bash npm run dev ```
-Usando pnpm:
+#### Usando **npm**:
 
-```bash pnpm dev ```
-Usando yarn:
+\`\`\`bash
+npm run dev
+\`\`\`
 
-```bash yarn dev ```
-Usando bun:
+#### Usando **pnpm**:
 
-```bash bun run dev ```
-📦 Produção
-Construir a aplicação para produção
+\`\`\`bash
+pnpm dev
+\`\`\`
+
+#### Usando **yarn**:
+
+\`\`\`bash
+yarn dev
+\`\`\`
+
+#### Usando **bun**:
+
+\`\`\`bash
+bun run dev
+\`\`\`
+
+---
+
+## 📦 Produção
+
+### Construir a aplicação para produção
 
 Para criar uma versão otimizada para produção, use um dos seguintes comandos:
-Usando npm:
 
-```bash npm run build ```
-Usando pnpm:
+#### Usando **npm**:
 
-```bash pnpm build ```
-Usando yarn:
+\`\`\`bash
+npm run build
+\`\`\`
 
-```bash yarn build ```
-Usando bun:
+#### Usando **pnpm**:
 
-```bash bun run build ```
-Visualizar o build de produção localmente
+\`\`\`bash
+pnpm build
+\`\`\`
+
+#### Usando **yarn**:
+
+\`\`\`bash
+yarn build
+\`\`\`
+
+#### Usando **bun**:
+
+\`\`\`bash
+bun run build
+\`\`\`
+
+---
+
+### Visualizar o build de produção localmente
 
 Após gerar o build de produção, você pode fazer uma prévia localmente utilizando os seguintes comandos:
-Usando npm:
 
-```bash npm run preview ```
-Usando pnpm:
+#### Usando **npm**:
 
-```bash pnpm preview ```
-Usando yarn:
+\`\`\`bash
+npm run preview
+\`\`\`
 
-```bash yarn preview ```
-Usando bun:
+#### Usando **pnpm**:
 
-```bash bun run preview ```
+\`\`\`bash
+pnpm preview
+\`\`\`
 
+#### Usando **yarn**:
+
+\`\`\`bash
+yarn preview
+\`\`\`
+
+#### Usando **bun**:
+
+\`\`\`bash
+bun run preview
+\`\`\`'
 
 ## 🛠 Ferramentas e Tecnologias Utilizadas
 
