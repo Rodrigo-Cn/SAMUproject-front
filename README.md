@@ -130,6 +130,7 @@ bun run preview
 - **Nuxt 3**
 - **Vue3-toastify**
 - **Axios**
+- **Chart.js**
 
 ## 📄 Licença
 

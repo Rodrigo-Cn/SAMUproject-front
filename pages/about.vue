@@ -189,7 +189,6 @@ h2.title-subtitle {
     background-color: rgba(83, 83, 83, 0.5);
 }
 
-
 @media (max-width:599px) {
     #about-nav {
         display: block;
