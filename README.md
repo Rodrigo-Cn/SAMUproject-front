@@ -13,16 +13,21 @@ Certifique-se de ter o Docker instalado e as dependências necessárias configur
 1. Construa a imagem do Docker:
 ```bash
    docker-compose build
+```
 
-    Suba o container:
-
+2. Suba o container:
+```bash
     docker-compose up
 ```
+
+3. Porta utilizada:
+Se tiver problema com a porta 3000, altere no ```docker-compose.yml ```
 
 Linux
 
 Os mesmos passos podem ser seguidos no Linux. Caso utilize alguma ferramenta de container como Docker, basta seguir os comandos acima para executar o projeto.
-🌍 Servidor de Desenvolvimento
+
+###🌍 Servidor de Desenvolvimento
 
 Para rodar o servidor de desenvolvimento, basta executar um dos seguintes comandos de acordo com o seu gerenciador de pacotes preferido. O servidor estará disponível em `http://localhost:3000\`.
 Usando npm:
@@ -70,22 +75,19 @@ Usando bun:
 ```bash bun run preview ```
 
 
-### 🛠 Ferramentas Utilizadas
+## 🛠 Ferramentas e Tecnologias Utilizadas
 
-Este projeto faz uso das seguintes tecnologias e ferramentas:
-
-    HTML
-    CSS
-    SCSS
-    SASS
-    Bootstrap
-    JavaScript
-    TypeScript
-    Vue 3
-    Pinia
-    Nuxt 3
-    Vue3-toastify
-    Axios
+- **HTML**
+- **CSS**
+- **SCSS/SASS**
+- **Bootstrap**
+- **JavaScript**
+- **TypeScript**
+- **Vue 3**
+- **Pinia**
+- **Nuxt 3**
+- **Vue3-toastify**
+- **Axios**
 
 📄 Licença
 
