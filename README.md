@@ -68,19 +68,24 @@ Usando yarn:
 Usando bun:
 
 ```bash bun run preview ```
-🛠 Ferramentas Utilizadas
+
+
+### 🛠 Ferramentas Utilizadas
 
 Este projeto faz uso das seguintes tecnologias e ferramentas:
 
-    HTML e CSS para a estrutura e estilo da interface.
-    SCSS e SASS para o pré-processamento de estilos.
-    Bootstrap para a construção de uma interface responsiva e moderna.
-    JavaScript e TypeScript para desenvolvimento dinâmico e tipado.
-    Vue 3 para a criação da interface de usuário reativa.
-    Pinia para gerenciamento de estado global.
-    Nuxt 3 como framework para renderização do lado do servidor e otimização de desempenho.
-    Vue3-toastify para mostrar notificações de forma simples e intuitiva.
-    Axios para fazer chamadas HTTP de maneira eficiente.
+    HTML
+    CSS
+    SCSS
+    SASS
+    Bootstrap
+    JavaScript
+    TypeScript
+    Vue 3
+    Pinia
+    Nuxt 3
+    Vue3-toastify
+    Axios
 
 📄 Licença
 
