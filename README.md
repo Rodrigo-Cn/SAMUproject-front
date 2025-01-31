@@ -33,27 +33,27 @@ Para rodar o servidor de desenvolvimento, basta executar um dos seguintes comand
 
 #### Usando **npm**:
 
-\`\`\`bash
+```bash
 npm run dev
-\`\`\`
+```
 
 #### Usando **pnpm**:
 
-\`\`\`bash
+```bash
 pnpm dev
-\`\`\`
+```
 
 #### Usando **yarn**:
 
-\`\`\`bash
+```bash
 yarn dev
-\`\`\`
+```
 
 #### Usando **bun**:
 
-\`\`\`bash
+```bash
 bun run dev
-\`\`\`
+```
 
 ---
 
@@ -65,27 +65,27 @@ Para criar uma versão otimizada para produção, use um dos seguintes comandos:
 
 #### Usando **npm**:
 
-\`\`\`bash
+```bash
 npm run build
-\`\`\`
+```
 
 #### Usando **pnpm**:
 
-\`\`\`bash
+```bash
 pnpm build
-\`\`\`
+```
 
 #### Usando **yarn**:
 
-\`\`\`bash
+```bash
 yarn build
-\`\`\`
+```
 
 #### Usando **bun**:
 
-\`\`\`bash
+```bash
 bun run build
-\`\`\`
+```
 
 ---
 
@@ -95,27 +95,27 @@ Após gerar o build de produção, você pode fazer uma prévia localmente utili
 
 #### Usando **npm**:
 
-\`\`\`bash
+```bash
 npm run preview
-\`\`\`
+```
 
 #### Usando **pnpm**:
 
-\`\`\`bash
+```bash
 pnpm preview
-\`\`\`
+```
 
 #### Usando **yarn**:
 
-\`\`\`bash
+```bash
 yarn preview
-\`\`\`
+```
 
 #### Usando **bun**:
 
-\`\`\`bash
+```bash
 bun run preview
-\`\`\`'
+```
 
 ## 🛠 Ferramentas e Tecnologias Utilizadas
 
@@ -131,7 +131,7 @@ bun run preview
 - **Vue3-toastify**
 - **Axios**
 
-📄 Licença
+## 📄 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
 
