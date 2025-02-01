@@ -2,7 +2,8 @@
 import type { DefineComponent, SlotsType } from 'vue'
 type IslandComponent<T extends DefineComponent> = T & DefineComponent<{}, {refresh: () => Promise<void>}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, SlotsType<{ fallback: { error: unknown } }>>
 interface _GlobalComponents {
-      'CreateDoctor': typeof import("../components/CreateDoctor.vue")['default']
+      'Banner': typeof import("../components/Banner.vue")['default']
+    'CreateDoctor': typeof import("../components/CreateDoctor.vue")['default']
     'CreateMedicine': typeof import("../components/CreateMedicine.vue")['default']
     'Footer': typeof import("../components/Footer.vue")['default']
     'FormLogin': typeof import("../components/FormLogin.vue")['default']
@@ -37,7 +38,8 @@ interface _GlobalComponents {
     'Body': typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
     'NuxtIsland': typeof import("../node_modules/nuxt/dist/app/components/nuxt-island")['default']
     'NuxtRouteAnnouncer': IslandComponent<typeof import("../node_modules/nuxt/dist/app/components/server-placeholder")['default']>
-      'LazyCreateDoctor': typeof import("../components/CreateDoctor.vue")['default']
+      'LazyBanner': typeof import("../components/Banner.vue")['default']
+    'LazyCreateDoctor': typeof import("../components/CreateDoctor.vue")['default']
     'LazyCreateMedicine': typeof import("../components/CreateMedicine.vue")['default']
     'LazyFooter': typeof import("../components/Footer.vue")['default']
     'LazyFormLogin': typeof import("../components/FormLogin.vue")['default']
@@ -78,6 +80,7 @@ declare module 'vue' {
   export interface GlobalComponents extends _GlobalComponents { }
 }
 
+export const Banner: typeof import("../components/Banner.vue")['default']
 export const CreateDoctor: typeof import("../components/CreateDoctor.vue")['default']
 export const CreateMedicine: typeof import("../components/CreateMedicine.vue")['default']
 export const Footer: typeof import("../components/Footer.vue")['default']
@@ -113,6 +116,7 @@ export const Html: typeof import("../node_modules/nuxt/dist/head/runtime/compone
 export const Body: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
 export const NuxtIsland: typeof import("../node_modules/nuxt/dist/app/components/nuxt-island")['default']
 export const NuxtRouteAnnouncer: IslandComponent<typeof import("../node_modules/nuxt/dist/app/components/server-placeholder")['default']>
+export const LazyBanner: typeof import("../components/Banner.vue")['default']
 export const LazyCreateDoctor: typeof import("../components/CreateDoctor.vue")['default']
 export const LazyCreateMedicine: typeof import("../components/CreateMedicine.vue")['default']
 export const LazyFooter: typeof import("../components/Footer.vue")['default']
