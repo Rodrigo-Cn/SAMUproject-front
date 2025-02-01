@@ -62,6 +62,41 @@ export default {
 
 </script>
 <style scoped>
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.modal.fade .modal-dialog {
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+.modal.show .modal-dialog {
+    transform: translateX(0);
+    opacity: 1;
+}
+
 .form-group {
     display: flex;
     flex-direction: column;
@@ -78,11 +113,11 @@ body {
     background-color: #eee;
 }
 
-.modal-body{
+.modal-body {
     border-radius: 8% 2% 2% 8%;
 }
 
-img{
+img {
     border-radius: 8%;
 }
 
@@ -220,6 +255,10 @@ h4 {
 
     .input-group {
         margin-right: 0px;
+    }
+
+    .input-group-text i {
+        font-size: 10px;
     }
 }
 </style>
