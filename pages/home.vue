@@ -26,7 +26,7 @@
 
                         <div class="col-12 col-lg-4 col-xl-4">
                             <div class="card">
-                                <div class="card-header">Quantitativo de Atendimentos e Últimas Ruas Atendidas</div>
+                                <div class="card-header">Quantitativo de Atendimentos</div>
                                 <div class="card-body">
                                     <div class="chart-container-2">
                                         <GraphTwo/>
@@ -98,10 +98,10 @@ title("Saúde Integrada");
 @media (max-width:599px) {
     .chart-container-1{
         margin-right: 65px;
-        margin-left: -5px;
+        margin-left: -10px;
     }
     .chart-container-2{
-        margin-right: 60px;
+        margin-right: 40px;
     }
 }
 </style>

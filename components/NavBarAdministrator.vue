@@ -27,7 +27,7 @@
                 </li>
 
                 <li>
-                    <a href="/medicines/">
+                    <a href="/list/medicine/">
                         <i class="fas fa-capsules"></i> <span>Medicamentos</span>
                         <small class="badge float-right badge-light"></small>
                     </a>
