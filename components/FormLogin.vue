@@ -27,6 +27,7 @@
 <script>
 import { showSuccessNotification, showErrorNotification } from "~/utils/notifications";
 import { useAuthStore } from "~/stores/authtoken";
+import { nextTick } from 'vue';
 
 export default {
   data() {
@@ -39,7 +40,7 @@ export default {
     async login(event) {
       event.preventDefault();
 
-      if(this.username == "" || this.password == "" ){
+      if (this.username == "" || this.password == "") {
         showErrorNotification("Algum campo está vazio.");
         return
       }
@@ -60,8 +61,8 @@ export default {
 
         const authStore = useAuthStore();
         authStore.setToken(response.token);
+        window.location.href = "/home";
         showSuccessNotification("Login realizado com sucesso!");
-        navigateTo("/home");
 
       } catch (error) {
         showErrorNotification("Usuário ou senha incorretos.");

@@ -6,7 +6,6 @@ export default defineNuxtRouteMiddleware(() => {
     authStore.loadToken();
 
     if (authStore.isAuthenticated) {
-        const router = useRouter();
-        router.push('/home'); 
+        window.location.href = "/home";
     }
 });

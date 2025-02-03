@@ -90,6 +90,12 @@ definePageMeta({
     middleware: ['auth']
 });
 
+onMounted(() => {
+  setInterval(() => {
+    window.location.reload();
+  }, 30000);
+});
+
 const themeStore = useThemeStore();
 title("Saúde Integrada");
 </script>
