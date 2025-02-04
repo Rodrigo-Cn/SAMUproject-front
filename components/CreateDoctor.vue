@@ -218,6 +218,10 @@ h4 {
     display: none;
 }
 
+.modal-content{
+    max-height: 400px;
+}
+
 
 @media (min-width:599px) {
     .modal-dialog {
