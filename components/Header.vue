@@ -30,8 +30,8 @@
                             <a href="javaScript:void();">
                                 <div class="media">
                                     <div class="media-body">
-                                        <h6 class="mt-2 user-title">Sarajhon Mccoy</h6>
-                                        <p class="user-subtitle">mccoy@example.com</p>
+                                        <h6 class="mt-2 user-title">{{ account.name }}</h6>
+                                        <p class="user-subtitle">{{ account.email }}</p>
                                     </div>
                                 </div>
                             </a>
@@ -40,23 +40,27 @@
                             <i class="icon-settings mr-2"></i>Editar Conta
                         </li>
                         <li class="dropdown-divider"></li>
-                        <li class="dropdown-item"  data-toggle="modal" data-target="#exampleModal">
+                        <li class="dropdown-item" data-toggle="modal" data-target="#exampleModal">
                             <i class="icon-power mr-2"></i>Sair
                         </li>
                     </ul>
                 </li>
             </ul>
         </nav>
-        <Logout/>
+        <Logout />
     </header>
 </template>
 <script>
 import { useThemeStore } from '~/stores/themeStore';
+import { useAuthStore } from "~/stores/authtoken";
+import axios from 'axios';
 
 export default {
     data() {
         return {
             themeStore: useThemeStore(),
+            authStore: useAuthStore(),
+            account: []
         };
     },
     computed: {
@@ -67,10 +71,33 @@ export default {
             return this.themeStore.theme;
         },
     },
+    mounted() {
+        const authStore = useAuthStore();
+        this.fetchCredentials(authStore.token);
+    },
     methods: {
         changeTheme() {
             this.themeStore.toggleTheme();
         },
+        async fetchCredentials(token) {
+            try {
+                const response = await axios.get("http://127.0.0.1:8000/api/v1/accounts/credentials/", {
+                    headers: {
+                        "Authorization": `Token ${token}`,
+                    }
+                });
+                console.log(response.data)
+                this.account = {
+                    'id': response.data.id,
+                    'name': response.data.name,
+                    'email': response.data.email
+                };
+                return response.data;
+            } catch (error) {
+                console.error("Erro ao carregar as credenciais:", error.response?.data || error.message);
+                return null;
+            }
+        }
     },
 };
 </script>

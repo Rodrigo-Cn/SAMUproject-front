@@ -3,6 +3,7 @@ import { defineStore } from 'pinia';
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     token: null,
+    permission: null,
   }),
 
   getters: {
@@ -18,10 +19,19 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
+    setPermission(permission) {
+      this.permission = permission;
+      if (process.client) {
+        localStorage.setItem('permission', permission);
+      }
+    },
+
     loadToken() {
       if (process.client) {
         const token = localStorage.getItem('token');
+        const permission = localStorage.getItem('permission');
         if (token) {
+          this.permission = permission;
           this.token = token;
         }
       }

@@ -33,12 +33,6 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="/cares/">
-                        <i class="zmdi zmdi-hospital"></i> <span>Atendimentos</span>
-                    </a>
-                </li>
-
                 <li class="sidebar-header">Cadastro</li>
                 <li>
                     <a href="s"><i class="fas fa-pills text-danger"></i>

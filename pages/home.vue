@@ -1,9 +1,7 @@
 <template>
     <div :class="['bg-theme', themeStore.theme]">
         <div id="wrapper">
-            <NavBarAdministrator />
-            <Header />
-
+            <TopPage />
             <div class="clearfix"></div>
 
             <div class="content-wrapper">

@@ -27,7 +27,7 @@
 <script>
 import { showSuccessNotification, showErrorNotification } from "~/utils/notifications";
 import { useAuthStore } from "~/stores/authtoken";
-import { nextTick } from 'vue';
+import axios from 'axios';
 
 export default {
   data() {
@@ -42,7 +42,7 @@ export default {
 
       if (this.username == "" || this.password == "") {
         showErrorNotification("Algum campo está vazio.");
-        return
+        return;
       }
 
       const data = {
@@ -51,24 +51,29 @@ export default {
       };
 
       try {
-        const response = await $fetch("http://127.0.0.1:8000/api/v1/authentication/login/", {
-          method: "POST",
+        const response = await axios.post("http://127.0.0.1:8000/api/v1/authentication/login/", data, {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(data),
+        });
+
+        const responseTwo = await axios.get("http://127.0.0.1:8000/api/v1/accounts/permission/", {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Token ${response.data.token}`,
+          },
         });
 
         const authStore = useAuthStore();
-        authStore.setToken(response.token);
+        authStore.setPermission(responseTwo.data.group);
+        authStore.setToken(response.data.token);
         window.location.href = "/home";
         showSuccessNotification("Login realizado com sucesso!");
 
       } catch (error) {
         showErrorNotification("Usuário ou senha incorretos.");
       }
-    }
-    ,
+    },
   },
 };
 </script>

@@ -15,7 +15,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/patients/">
+                    <a href="/list/patient/">
                         <i class="fas fa-procedures"></i> <span>Pacientes</span>
                     </a>
                 </li>
@@ -30,12 +30,6 @@
                     <a href="/list/medicine/">
                         <i class="fas fa-capsules"></i> <span>Medicamentos</span>
                         <small class="badge float-right badge-light"></small>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="/cares/">
-                        <i class="zmdi zmdi-hospital"></i> <span>Atendimentos</span>
                     </a>
                 </li>
 

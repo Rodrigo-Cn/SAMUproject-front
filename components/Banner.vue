@@ -3,11 +3,11 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
-                    <img id="mylogo" src="public/assets/images/home/image (11).png" alt="Logo" width="80" height="80"
+                    <img id="mylogo" src="/assets/images/home/image (11).png" alt="Logo" width="80" height="80"
                         class="d-inline-block align-text-center">
-                    <span lass="navbar-brand"
+                    <span class="navbar-brand"
                         style="margin-left: 5px; color: aliceblue; font-family: Helvetica;"><strong>SAMU
-                            <scan style="color: red;">192</scan>
+                            <span style="color: red;">192</span>
                         </strong></span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -31,7 +31,7 @@
     </header>
 </template>
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { computed, onMounted, onUnmounted } from 'vue';
 
 
 const imageSrc = computed(() => {
