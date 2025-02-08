@@ -14,16 +14,46 @@
     </div>
   </div>
 </template>
-
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+import { useAuthStore } from "~/stores/authtoken";
+
+const token = useAuthStore().token
 
 const stats = ref([
-  { label: 'Total de Pacientes', value: 100, percentage: 70, color: 'rgba(75, 192, 192, 0.8)', icon: 'fas fa-user-injured' },
-  { label: 'Total de Medicamentos', value: 230, percentage: 85, color: 'rgba(255, 159, 64, 0.8)', icon: 'fas fa-pills' },
-  { label: 'Total de Atendimentos', value: 310, percentage: 95, color: 'rgba(153, 102, 255, 0.8)', icon: 'fas fa-notes-medical' },
-  { label: 'Total de Médicos', value: 310, percentage: 95, color: 'rgba(54, 162, 235, 0.8)', icon: 'fas fa-user-md' }
+  { label: 'Total de Pacientes', value: 0, percentage: 0, color: 'rgba(75, 192, 192, 0.8)', icon: 'fas fa-user-injured' },
+  { label: 'Total de Medicamentos', value: 0, percentage: 0, color: 'rgba(255, 159, 64, 0.8)', icon: 'fas fa-pills' },
+  { label: 'Total de Atendimentos', value: 0, percentage: 0, color: 'rgba(153, 102, 255, 0.8)', icon: 'fas fa-notes-medical' },
+  { label: 'Total de Médicos', value: 0, percentage: 0, color: 'rgba(54, 162, 235, 0.8)', icon: 'fas fa-user-md' }
 ])
+
+const fetchStatsData = async () => {
+    try {
+        const response = await axios.get("http://127.0.0.1:8000/api/v1/chartparameters/", {
+            headers: {
+                "Authorization": `Token ${token}`,
+            }
+        });
+
+        const { numPatients, numMedicines, numPatientCares, numDoctors } = response.data;
+
+        stats.value[0].value = numPatients;
+        stats.value[1].value = numMedicines;
+        stats.value[2].value = numPatientCares;
+        stats.value[3].value = numDoctors;
+
+        const maxValue = Math.max(numPatients, numMedicines, numPatientCares, numDoctors) || 1;
+        stats.value.forEach(stat => {
+            stat.percentage = Math.round((stat.value / maxValue) * 100);
+        });
+
+    } catch (error) {
+        console.error("Erro ao carregar os dados da API:", error.response?.data || error.message);
+    }
+}
+
+onMounted(fetchStatsData)
 </script>
 
 <style>
