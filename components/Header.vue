@@ -86,7 +86,6 @@ export default {
                         "Authorization": `Token ${token}`,
                     }
                 });
-                console.log(response.data)
                 this.account = {
                     'id': response.data.id,
                     'name': response.data.name,
@@ -94,7 +93,7 @@ export default {
                 };
                 return response.data;
             } catch (error) {
-                console.error("Erro ao carregar as credenciais:", error.response?.data || error.message);
+                //console.error("Erro ao carregar as credenciais:", error.response?.data || error.message);
                 return null;
             }
         }
