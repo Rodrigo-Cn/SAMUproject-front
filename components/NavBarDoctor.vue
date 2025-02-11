@@ -43,7 +43,25 @@
     </div>
 </template>
 <style scoped>
-    .sidebar-menu li span{
-        color: white;
-    }
+.modal {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.modal.show {
+    transform: translateX(0);
+}
+
+.modal-overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.modal.show .modal-overlay {
+    opacity: 1;
+}
+
+.sidebar-menu li span {
+    color: white;
+}
 </style>

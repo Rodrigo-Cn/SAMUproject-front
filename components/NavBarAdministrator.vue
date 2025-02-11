@@ -21,7 +21,7 @@
                 </li>
 
                 <li>
-                    <a href="/doctors/">
+                    <a href="/list/doctor/">
                         <i class="fas fa-user-md"></i> <span>Médicos</span>
                     </a>
                 </li>
@@ -35,7 +35,7 @@
 
                 <li class="sidebar-header">Cadastro</li>
                 <li data-toggle="modal" data-target="#createDoctorModal">
-                    <a ><i class="fas fa-user-plus text-danger"></i>
+                    <a><i class="fas fa-user-plus text-danger"></i>
                         <span>Cadastrar Médico</span></a>
                 </li>
                 <li data-toggle="modal" data-target="#createMedicineModal">
@@ -44,15 +44,34 @@
                 </li>
             </ul>
         </div>
-        <CreateDoctor/>
-        <CreateMedicine/>
+        <CreateDoctor />
+        <CreateMedicine />
     </div>
 </template>
 <style scoped>
-    .sidebar-menu li span{
-        color: white;
-    }
-    li{
-        cursor: pointer;
-    }
+.modal {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.modal.show {
+    transform: translateX(0);
+}
+
+.modal-overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.modal.show .modal-overlay {
+    opacity: 1;
+}
+
+.sidebar-menu li span {
+    color: white;
+}
+
+li {
+    cursor: pointer;
+}
 </style>

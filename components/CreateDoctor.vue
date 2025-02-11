@@ -367,4 +367,21 @@ h4 {
         font-size: 10px;
     }
 }
+
+@media (max-width:400px) {
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    .input-group {
+        margin-right: 0px;
+    }
+
+    .input-group-text i {
+        font-size: 8px;
+    }
+}
 </style>
