@@ -1,61 +1,63 @@
 <template>
-
     <div class="modal fade" id="createMedicineModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span> </button> </div>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-window-close-o"></i>
+                    </button>
+                </div>
                 <div class="modal-body p-0 row" :class="['bg-theme', themeStore.theme]">
-                    <div class="col-12 col-lg-5 ad p-0"> <img src="public/assets/images/medicine.gif" width="100%"
-                            height="100%" /> </div>
+                    <div class="col-12 col-lg-5 ad p-0">
+                        <img src="public/assets/images/medicine.gif" width="100%" height="100%" />
+                    </div>
                     <div class="details col-12 col-lg-7">
-                        <h4><i class="fas fas fa-pills"></i> Cadastrar Medicamento</h4>
-                        <form class="form-group mt-3 pt-3 mb-4">
-                            <!-- Nome do Medicamento -->
+                        <h4><i class="fas fa-pills"></i> Cadastrar Medicamento</h4>
+                        <form class="form-group mt-3 pt-3 mb-4" @submit.prevent="createMedicine">
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class="fas fa-capsules"></i></span>
-                                <input type="text" class="form-control custom-input" placeholder="Nome" name="name"
-                                    required>
+                                <input type="text" v-model="name" class="form-control" placeholder="Nome" 
+                                    :class="{'is-valid': nameValid, 'is-invalid': !nameValid}" required>
                             </div>
 
-                            <!-- Dosagem -->
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class="fas fa-pills"></i></span>
-                                <input type="text" class="form-control custom-input" placeholder="Dosagem" name="dosage"
-                                    required>
+                                <input type="text" v-model="dosage" class="form-control" placeholder="Dosagem" 
+                                    :class="{'is-valid': dosageValid, 'is-invalid': !dosageValid}" required>
                             </div>
 
-                            <!-- Fabricante -->
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class="fas fa-industry"></i></span>
-                                <input type="text" class="form-control custom-input" placeholder="Fabricante"
-                                    name="manufacturer" required>
+                                <input type="text" v-model="manufacturer" class="form-control" placeholder="Fabricante" 
+                                    :class="{'is-valid': manufacturerValid, 'is-invalid': !manufacturerValid}" required>
                             </div>
 
-                            <!-- Composição -->
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class="fas fa-flask"></i></span>
-                                <input type="text" class="form-control custom-input" placeholder="Composição"
-                                    name="composition" required>
+                                <input type="text" v-model="composition" class="form-control" placeholder="Composição" 
+                                    :class="{'is-valid': compositionValid, 'is-invalid': !compositionValid}" required>
                             </div>
 
                             <div class="input-group mb-3">
                                 <div class="file-upload-container">
-                                    <input type="file" class="file-input" name="medicine_image" id="medicine_image"
-                                        required>
+                                    <input type="file" class="file-input" name="medicine_image" id="medicine_image" 
+                                        accept="image/*" @change="onFileChange">
                                     <label for="medicine_image" class="file-label">
                                         <i class="fas fa-upload"></i> Escolher Imagem
                                     </label>
                                 </div>
+                                <div v-if="imagePreview">
+                                    <img :src="imagePreview" class="img-thumbnail mt-2" width="100">
+                                </div>
                             </div>
-                            <div class="">
-                                <button type="submit" class="btn btn-light">
+
+                            <div>
+                                <button type="submit" class="btn btn-light" :disabled="!isFormValid">
                                     <i class="fa fa-plus"></i> Cadastrar
                                 </button>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -64,16 +66,110 @@
 </template>
 <script>
 import { useThemeStore } from "~/stores/themeStore";
-
+import { useAuthStore } from "~/stores/authtoken";
+import { showSuccessNotification, showErrorNotification } from "~/utils/notifications";
+import axios from 'axios';
 export default {
+    data() {
+        return {
+            name: '',
+            dosage: '',
+            manufacturer: '',
+            composition: '',
+            medicine_image: null,
+            imagePreview: null,
+        };
+    },
     setup() {
         const themeStore = useThemeStore();
         return { themeStore };
     },
-}
+    computed: {
+        nameValid() {
+            return this.name.length > 2;
+        },
+        dosageValid() {
+            return /^[0-9]+(mg|g|ml|L)$/.test(this.dosage);
+        },
+        manufacturerValid() {
+            return this.manufacturer.length > 2;
+        },
+        compositionValid() {
+            return this.composition.length > 2;
+        },
+        isFormValid() {
+            return this.nameValid && this.dosageValid && this.manufacturerValid && this.compositionValid;
+        }
+    },
+    methods: {
+        onFileChange(event) {
+            const file = event.target.files[0];
+            if (file) {
+                this.medicine_image = file;
+                this.imagePreview = URL.createObjectURL(file);
+            }
+        },
+        async createMedicine() {
+            if (!this.isFormValid) {
+                showErrorNotification("Preencha todos os campos corretamente.");
+                return;
+            }
 
+            const authStore = useAuthStore();
+            const token = authStore.token;
+
+            const formData = new FormData();
+            formData.append("name", this.name);
+            formData.append("dosage", this.dosage);
+            formData.append("manufacturer", this.manufacturer);
+            formData.append("composition", this.composition);
+            if (this.medicine_image) {
+                formData.append("medicine_image", this.medicine_image);
+            }
+
+            try {
+                await axios.post("http://127.0.0.1:8000/api/v1/medicines/", formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        "Authorization": `Token ${token}`,
+                    }
+                });
+                this.resetForm();
+                showSuccessNotification("Medicamento cadastrado com sucesso!");
+            } catch (error) {
+                console.error(error);
+                showErrorNotification(error.response?.data?.message || "Erro ao cadastrar medicamento.");
+            }
+        },
+        resetForm() {
+            this.name = '';
+            this.dosage = '';
+            this.manufacturer = '';
+            this.composition = '';
+            this.medicine_image = null;
+            this.imagePreview = null;
+        }
+    }
+};
 </script>
 <style scoped>
+.is-invalid {
+    position: relative;
+    padding-right: 2.5rem;
+}
+
+.is-invalid::after {
+    content: "\f057";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: red;
+    font-size: 1.2rem;
+}
+
 @keyframes slideIn {
     from {
         transform: translateX(100%);
