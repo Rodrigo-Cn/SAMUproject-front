@@ -1,67 +1,169 @@
 <template>
-
     <div class="modal fade" id="createDoctorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span> </button> </div>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-window-close-o"></i>
+                    </button>
+                </div>
                 <div class="modal-body p-0 row" :class="['bg-theme', themeStore.theme]">
-                    <div class="col-12 col-lg-5 ad p-0"> <img src="public/assets/images/doccreate.gif" width="100%"
-                            height="100%" /> </div>
+                    <div class="col-12 col-lg-5 ad p-0">
+                        <img src="public/assets/images/doccreate.gif" width="100%" height="100%" />
+                    </div>
                     <div class="details col-12 col-lg-7">
                         <h4><i class="fas fa-user-plus"></i> Cadastrar Médico</h4>
-                        <form class="form-group mt-3 pt-3 mb-4">
+                        <form class="form-group mt-3 pt-3 mb-4" @submit.prevent="createDoctor">
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                <input type="text" class="form-control" placeholder="Usuário" required>
+                                <input type="text" v-model="username" class="form-control" placeholder="Usuário" :class="{'is-valid': usernameValid, 'is-invalid': !usernameValid}" required>
                             </div>
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                                <input type="password" class="form-control" placeholder="Senha" required>
+                                <input type="password" v-model="password" class="form-control" placeholder="Senha" :class="{'is-valid': isPasswordValid, 'is-invalid': !isPasswordValid}" required>
+                                <div v-if="!isPasswordValid" class="invalid-feedback">
+                                    A senha deve ter pelo menos 8 caracteres, incluir letras e números, e não ser apenas numérica.
+                                </div>
                             </div>
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                <input type="email" class="form-control" placeholder="Email" required>
+                                <input type="email" v-model="email" class="form-control" placeholder="Email" :class="{'is-valid': emailValid, 'is-invalid': !emailValid}" required>
                             </div>
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                <input type="text" class="form-control" placeholder="Nome" required>
+                                <input type="text" v-model="name" class="form-control" placeholder="Nome" :class="{'is-valid': nameValid, 'is-invalid': !nameValid}" required>
                             </div>
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class="fas fa-user-md"></i></span>
-                                <input type="text" class="form-control" placeholder="CRM" required>
+                                <input type="text" v-model="crm" class="form-control" placeholder="CRM" :class="{'is-valid': isCrmValid, 'is-invalid': !isCrmValid}" required>
                             </div>
 
-                            <div class="">
-                                <button type="submit" class="btn btn-light">
+                            <div>
+                                <button type="submit" class="btn btn-light" :disabled="!isFormValid">
                                     <i class="fa fa-plus"></i> Cadastrar
                                 </button>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
 <script>
 import { useThemeStore } from "~/stores/themeStore";
+import { useAuthStore } from "~/stores/authtoken";
+import { showSuccessNotification, showErrorNotification } from "~/utils/notifications";
+import axios from 'axios';
 
 export default {
+    data() {
+        return {
+            username: '',
+            name: '',
+            password: '',
+            email: '',
+            crm: '',
+        };
+    },
     setup() {
         const themeStore = useThemeStore();
         return { themeStore };
     },
-}
+    computed: {
+        isPasswordValid() {
+            return this.password.length >= 8 && /[A-Za-z]/.test(this.password) && /\d/.test(this.password);
+        },
+        isCrmValid() {
+            return /^[0-9]{6}$/.test(this.crm);
+        },
+        emailValid() {
+            return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(this.email);
+        },
+        nameValid() {
+            return this.name.length > 0;
+        },
+        usernameValid() {
+            const usernameRegex = /^[\w.@+-\s]+$/;
+            return this.username.length >= 5 && usernameRegex.test(this.username);
+        },
+        isFormValid() {
+            return this.isPasswordValid && this.isCrmValid && this.emailValid && this.nameValid && this.usernameValid;
+        }
+    },
+    methods: {
+        async createDoctor() {
+            const authStore = useAuthStore();
+            const token = authStore.token;
 
+            if (!this.isFormValid) {
+                showErrorNotification("Por favor, preencha todos os campos corretamente.");
+                return;
+            }
+
+            const body = {
+                username: this.username,
+                name: this.name,
+                password: this.password,
+                email: this.email,
+                crm: this.crm,
+            };
+
+            try {
+                await axios.post("http://127.0.0.1:8000/api/v1/doctors/", body, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Token ${token}`,
+                    }
+                });
+                this.resetForm();
+                showSuccessNotification("Médico cadastrado com sucesso!");
+            } catch (error) {
+                console.error(error);
+                showErrorNotification(error.response?.data?.message || "Erro ao cadastrar médico.");
+            }
+        },
+        resetForm() {
+            this.username = '';
+            this.name = '';
+            this.password = '';
+            this.email = '';
+            this.crm = '';
+        }
+    }
+};
 </script>
 <style scoped>
+input.is-invalid {
+    border-color: #dc3545;
+}
+
+input.is-invalid ~ .invalid-feedback {
+    color: #dc3545;
+}
+
+input.is-invalid ~ .invalid-feedback i {
+    font-size: 1.2rem;
+    margin-right: 5px;
+}
+
+.invalid-feedback {
+    display: flex;
+    align-items: center;
+}
+
+.invalid-feedback i {
+    font-size: 1.2rem;
+    margin-right: 5px;
+}
+
+
 @keyframes slideIn {
     from {
         transform: translateX(100%);
