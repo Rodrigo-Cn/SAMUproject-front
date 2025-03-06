@@ -1,157 +1,132 @@
 <template>
     <div :class="['bg-theme', themeStore.theme]">
-        <div id="wrapper">
-            <NavBarAdministrator />
-            <Header />
-            <section class="py-5 content-wrapper">
-
-                <div class="col-md-12 search-buttom">
-                    <div class="search">
-                        <i class="fa fa-search"></i>
-                        <input type="text" class="form-control" placeholder="Nome do medicamento...">
-                        <button class="btn">Buscar</button>
+      <div id="wrapper">
+        <NavBarAdministrator />
+        <Header />
+        <section class="py-5 content-wrapper">
+          <DeleteMedicine :medicineId="medicineId" :fetchMedicines="fetchMedicines" />
+  
+          <div class="col-md-12 search-buttom">
+            <div class="search">
+              <i class="fa fa-search"></i>
+              <input v-model="searchQuery" type="text" class="form-control" placeholder="Nome do medicamento..."
+                @keyup.enter="searchMedicines" />
+              <button class="btn" @click="searchMedicines">Buscar</button>
+            </div>
+          </div>
+  
+          <div class="container px-4 px-lg-5 mt-5">
+            <div v-if="loading" class="text-center">
+              <div id="spinner" class="text-center">
+                <div class="spinner-border text-danger mt-5 mb-5" role="status">
+                  <span class="sr-only mt-5 mb-5">Loading...</span>
+                </div>
+              </div>
+            </div>
+            <div v-else-if="medicines.length === 0" class="text-center">Nenhum medicamento encontrado.</div>
+            <div v-else class="row gx-4 gx-lg-5 justify-content-center flex-wrap">
+              <div v-for="(medicine, index) in medicines" :key="index" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-5">
+                <div class="card h-100">
+                  <img v-if="medicine.medicine_image" class="card-img-top" :src="`data:image/jpeg;base64,${medicine.medicine_image}`"
+                    alt="Imagem do medicamento" />
+                  <img v-else class="card-img-top" src="/assets/images/medicine.jpg" alt="Imagem do medicamento" />
+                  <div class="card-body p-4">
+                    <div class="text-center">
+                      <h5 class="fw-bolder">{{ medicine.name }}</h5>
+                      <p>{{ medicine.dosage }} - {{ medicine.manufacturer }}</p>
                     </div>
+                  </div>
+                  <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-between">
+                    <a href="#"><i class="fas fa-eye fa-lg"></i></a>
+                    <a href="#"><i class="fas fa-pencil-alt fa-lg"></i></a>
+                    <a href="#" @click="openDeleteModal(medicine.id)"><i class="fas fa-trash fa-lg"></i></a>
+                  </div>
                 </div>
-
-                <div class="container px-4 px-lg-5 mt-5">
-                    <div class="row gx-4 gx-lg-5 justify-content-center flex-wrap">
-                        <div v-for="(product, index) in products" :key="index"
-                            class="col-12 col-sm-6 col-md-4 col-lg-3 mb-5">
-                            <div class="card h-100">
-                                <img class="card-img-top" :src="product.image" alt="..." />
-                                <div class="card-body p-4">
-                                    <div class="text-center">
-                                        <h5 class="fw-bolder">{{ product.name }}</h5>
-                                        ${{ product.price }}
-                                    </div>
-                                </div>
-                                <div
-                                    class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-between">
-                                    <a href="#"><i class="fas fa-eye fa-lg"></i></a>
-                                    <a href="#"><i class="fas fa-pencil-alt fa-lg"></i></a>
-                                    <a href="#"><i class="fas fa-trash fa-lg"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="pagination_rounded">
-                    <ul>
-                        <li>
-                            <a href="#" class="prev">
-                                <i class="fa fa-angle-left" aria-hidden="true"></i> Prev
-                            </a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li class="hidden-xs"><a href="#">2</a></li>
-                        <li class="hidden-xs"><a href="#">3</a></li>
-                        <li>
-                            <a href="#" class="next">
-                                Next <i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-        </div>
-        <Footer />
+              </div>
+            </div>
+          </div>
+  
+          <div class="pagination_rounded" v-if="nextPage || prevPage">
+            <ul>
+              <li v-if="prevPage">
+                <a href="#" class="prev" @click.prevent="fetchMedicines(prevPage)">
+                  <i class="fa fa-angle-left" aria-hidden="true"></i> Prev
+                </a>
+              </li>
+              <li v-if="nextPage">
+                <a href="#" class="next" @click.prevent="fetchMedicines(nextPage)">
+                  Next <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+      <Footer />
     </div>
-</template>
-
-<script setup>
-import { useThemeStore } from "~/stores/themeStore";
-import { title } from "/composables/title";
-
-const products = [
-    {
-        name: "Fancy Product",
-        price: "40.00",
-        image: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
-    },
-    {
-        name: "Popular Item",
-        price: "40.00",
-        image: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
-    },
-    {
-        name: "Popular Item",
-        price: "40.00",
-        image: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
-    },
-    {
-        name: "Popular Item",
-        price: "40.00",
-        image: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
-    },
-    {
-        name: "Popular Item",
-        price: "40.00",
-        image: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
-    },
-    {
-        name: "Popular Item",
-        price: "40.00",
-        image: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
-    },
-    {
-        name: "Popular Item",
-        price: "40.00",
-        image: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
-    },
-    {
-        name: "Popular Item",
-        price: "40.00",
-        image: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
-    },
-    {
-        name: "Popular Item",
-        price: "40.00",
-        image: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
-    },
-    {
-        name: "Popular Item",
-        price: "40.00",
-        image: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
-    },
-    {
-        name: "Popular Item",
-        price: "40.00",
-        image: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
-    },
-    {
-        name: "Popular Item",
-        price: "40.00",
-        image: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
-    },
-    {
-        name: "Popular Item",
-        price: "40.00",
-        image: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
-    },
-    {
-        name: "Popular Item",
-        price: "40.00",
-        image: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
-    },
-    {
-        name: "Popular Item",
-        price: "40.00",
-        image: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
-    },
-    {
-        name: "Popular Item",
-        price: "40.00",
-        image: "https://dummyimage.com/450x300/dee2e6/6c757d.jpg",
-    },
-];
-
-definePageMeta({
-    middleware: ["auth"],
-});
-
-const themeStore = useThemeStore();
-title("Medicamentos");
-</script>
+  </template>
+  
+  <script setup>
+  import { ref, onMounted } from "vue";
+  import axios from "axios";
+  import { useThemeStore } from "~/stores/themeStore";
+  import { title } from "~/composables/title";
+  import { useAuthStore } from "~/stores/authtoken";
+  
+  const token = useAuthStore().token;
+  const medicines = ref([]);
+  const nextPage = ref(null);
+  const prevPage = ref(null);
+  const loading = ref(true);
+  const searchQuery = ref('');
+  const medicineId = ref(null);
+  
+  const openDeleteModal = (id) => {
+      medicineId.value = id;
+      $('#exampleModal4').modal('show');
+  };
+  
+  const fetchMedicines = async (url = "http://127.0.0.1:8000/api/v1/medicines/") => {
+      try {
+          loading.value = true;
+          const response = await axios.get(url, {
+              params: {
+                  name: searchQuery.value
+              },
+              headers: {
+                  "Authorization": `Token ${token}`,
+              },
+          });
+  
+          medicines.value = response.data.results || [];
+          nextPage.value = response.data.next;
+          prevPage.value = response.data.previous;
+      } catch (error) {
+          console.error(error.response?.data || error.message);
+      } finally {
+          loading.value = false;
+      }
+  };
+  
+  const searchMedicines = () => {
+      fetchMedicines();
+  };
+  
+  onMounted(fetchMedicines);
+  
+  definePageMeta({
+      middleware: ["auth"],
+  });
+  
+  const themeStore = useThemeStore();
+  title("Medicamentos");
+  </script>  
 <style scoped>
+#spinner {
+    margin-top: 100px;
+    margin-bottom: 300px;
+}
+
 .pagination_rounded,
 .pagination_square {
     display: flex;
@@ -166,6 +141,14 @@ title("Medicamentos");
     padding: 0;
     list-style: none;
 }
+
+.card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
 
 .pagination_rounded li:first-child {
     margin-left: 0px;
@@ -270,26 +253,27 @@ a:link {
     max-width: 70%;
 }
 
-input::placeholder{
+input::placeholder {
     color: white;
 }
 
 @media (max-width:599px) {
 
-.search button {
-    height: 40px;
-    width: 80px;
-    font-size: 9px;
-}
+    .search button {
+        height: 40px;
+        width: 80px;
+        font-size: 9px;
+    }
 
-.search {
-    width: 100%;
-    max-width: 100%;
-}
+    .search {
+        width: 100%;
+        max-width: 100%;
+    }
 
-.search input {
-    height: 50px;
-    text-indent: 25px;
-}
+    .search input {
+        height: 50px;
+        text-indent: 25px;
+    }
+
 }
 </style>
