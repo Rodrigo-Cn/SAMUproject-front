@@ -5,7 +5,7 @@
         <Header />
         <section class="py-5 content-wrapper">
           <DeleteMedicine :medicineId="medicineId" :fetchMedicines="fetchMedicines" />
-  
+          <EditMedicine :medicineId="medicineId" :fetchMedicines="fetchMedicines"/>
           <div class="col-md-12 search-buttom">
             <div class="search">
               <i class="fa fa-search"></i>
@@ -38,7 +38,7 @@
                   </div>
                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-between">
                     <a href="#"><i class="fas fa-eye fa-lg"></i></a>
-                    <a href="#"><i class="fas fa-pencil-alt fa-lg"></i></a>
+                    <a href="#" @click="openEditModal(medicine.id)"><i class="fas fa-pencil-alt fa-lg"></i></a>
                     <a href="#" @click="openDeleteModal(medicine.id)"><i class="fas fa-trash fa-lg"></i></a>
                   </div>
                 </div>
@@ -79,11 +79,16 @@
   const prevPage = ref(null);
   const loading = ref(true);
   const searchQuery = ref('');
-  const medicineId = ref(null);
+  const medicineId = ref(0);
   
   const openDeleteModal = (id) => {
       medicineId.value = id;
       $('#exampleModal4').modal('show');
+  };
+    
+  const openEditModal = (id) => {
+      medicineId.value = id;
+      $('#editMedicineModal').modal('show');
   };
   
   const fetchMedicines = async (url = "http://127.0.0.1:8000/api/v1/medicines/") => {

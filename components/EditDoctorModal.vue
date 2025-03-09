@@ -58,7 +58,6 @@ const abrirModal = (dadosMedico) => {
 };
 
 const salvarAlteracoes = () => {
-    console.log("Médico atualizado:", medico.value);
     const modal = bootstrap.Modal.getInstance(document.getElementById("editDoctorModal"));
     modal.hide();
 };

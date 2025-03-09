@@ -97,7 +97,6 @@ const abrirModal = (dadosPaciente) => {
 };
 
 const salvarAlteracoes = () => {
-    console.log("Paciente atualizado:", paciente.value);
     const modal = bootstrap.Modal.getInstance(document.getElementById("editPatientModal"));
     modal.hide();
 };

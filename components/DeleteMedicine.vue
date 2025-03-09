@@ -51,7 +51,6 @@ export default {
         },
         async deleteMedicine() {
             try {
-                console.log("ID do medicamento:", this.medicineId);
                 const token = this.authStore.token;
 
                 const response = await axios.delete(
